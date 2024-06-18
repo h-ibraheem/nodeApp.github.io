@@ -1,0 +1,11 @@
+# Exported from Render on 2024-06-18T21:23:06Z
+services:
+- type: web
+  name: nodeApp.github.io
+  runtime: node
+  repo: https://github.com/h-ibraheem/nodeApp.github.io
+  plan: free
+  region: oregon
+  buildCommand: yarn
+  startCommand: yarn start
+version: "1"
