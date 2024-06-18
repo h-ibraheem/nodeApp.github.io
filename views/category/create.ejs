@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head.ejs')%>
+
+    <body>
+        <%- include('../partials/nav.ejs')%>
+
+            <div class="overflow-hidden card table-nowrap table-card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+
+                    <a href="/category" class="btn btn-light btn-sm">All Category</a>
+                </div>
+
+                <form class="row g-3 container m-auto pb-4" action="/category" method="POST">
+                    <div class="col-md-4">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" name="name">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="details" class="form-label">Details</label>
+                        <input type="text" class="form-control" id="details" name="details">
+                    </div>
+
+
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary ">Save</button>
+                    </div>
+                </form>
+            </div>
+
+
+
+            <%- include('../partials/footer.ejs')%>
+                <%- include ('../partials/script.ejs')%>
+    </body>
+
+</html>

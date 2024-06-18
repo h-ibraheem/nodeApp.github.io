@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head.ejs')%>
+
+    <body>
+        <%- include('../partials/nav.ejs')%>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 mb-3 mb-lg-5">
+                        <div class="overflow-hidden card table-nowrap table-card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">All item</h5>
+                                <a href="/item/create" class="btn btn-light btn-sm">New Item</a>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table mb-0">
+                                    <thead class="small text-uppercase bg-body text-muted">
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>category</th>
+                                            <th>Last update</th>
+                                            <th class="text-end">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% if(item.length> 0) { %>
+                                            <% item.forEach( item=>{ %>
+                                                <tr class="align-middle">
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div>
+                                                                <div class="h6 mb-0 lh-1">
+                                                                    <%= item.name %>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <%= item.category %>
+                                                    </td>
+                                                    <td>
+                                                        <%= item.updatedAt %>
+                                                    </td>
+                                                    <td class="text-end">
+                                                        <div class="drodown">
+                                                            <a data-bs-toggle="dropdown" href="#" class="btn p-1"
+                                                                aria-expanded="false">
+                                                                <i class="fa fa-bars" aria-hidden="true"></i>
+                                                            </a>
+                                                            <div class="dropdown-menu dropdown-menu-end" style="">
+                                                                <a href="/item/details/<%= item._id %>"
+                                                                    class="dropdown-item">Details</a>
+
+                                                                <a href="#" class="dropdown-item delete"
+                                                                    data-doc="<%= item._id %>">Delete</a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <%}) %>
+                                                    <%}%>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <%- include('../partials/footer.ejs')%>
+                <%- include ('../partials/script.ejs')%>
+                    <script>
+                        const trashcan = document.querySelector('a.delete');
+
+                        trashcan.addEventListener('click', (e) => {
+                            const endpoint = `/item/${trashcan.dataset.doc}`;
+                            fetch(endpoint, {
+                                method: 'DELETE'
+                            })
+                                .then(response => response.json())
+                                .then(data => window.location.href = data.redirect)
+                                .catch(err => console.log(err));
+                        })
+                    </script>
+    </body>
+
+</html>
